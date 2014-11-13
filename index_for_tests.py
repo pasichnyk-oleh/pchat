@@ -9,6 +9,9 @@ import settings
 
 
 class TestingServer(object):
+    '''
+    Server for tests. Clone DB such it do Django
+    '''
     TEST_DB_NAME = 'test2'
     BACKUP_FILE_NAME = 'db_for_test.sql'
 
