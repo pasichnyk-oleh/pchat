@@ -24,8 +24,9 @@ class User(Base):
         '''
         Check exist or not user in DB
 
-        :param string:
-        : return:
+        :param string: user name
+        :param string: user password
+        : return: None if not isset or dict with user_name and user_id keys
         '''
         md5_password = decode_string(password)
 
