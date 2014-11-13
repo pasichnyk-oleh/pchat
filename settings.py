@@ -30,5 +30,5 @@ STATIC_URL = '/static/'
 SOCKET_URL = r"/chat/socket"
 
 # settings for testing
-TESTING_PORT = 8888 #port for unit test
+TESTING_PORT = 8889 #port for unit test
 TESTING_SITE_URL = '0.0.0.0' #url for tests requests
