@@ -1,0 +1,13 @@
+Jinja2==2.7.3
+MarkupSafe==0.23
+SQLAlchemy==0.9.8
+WTAlchemy==0.1b3
+WTForms==2.0.1
+backports.ssl-match-hostname==3.4.0.2
+certifi==14.05.14
+psycopg2==2.5.4
+requests==2.4.3
+tornado==4.0.2
+ws4py==0.3.4
+wsgiref==0.1.2
+wtforms-tornado==0.0.2

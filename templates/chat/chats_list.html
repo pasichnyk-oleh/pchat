@@ -1,0 +1,16 @@
+{% if chats %}
+
+    {% for chat in chats %}
+        <blockquote>
+            <p><a href="chat/{{ chat.id }}" class="">{{ chat.name }}</a>
+            {% if chat.id in user_in_chats %}
+                <button type="submit" class="btn btn-danger join" data-url="/chat/join/{{ chat.id }}">leave</button>
+            {% else %}
+                <button type="submit" class="btn btn-success join" data-url="/chat/join/{{ chat.id }}">join</button>
+            {% endif %}</p>
+        </blockquote>
+    {% endfor %}
+
+{% else %}
+    <p class="text-warning">No chats!</p>
+{% endif %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from "helpers/render.html" import render_form %}
+
+{% block title %}Registration{% endblock %}
+
+{% block body %}
+    <h2>Registration</h2>
+        <form role="form" action="" method="post">
+
+            {{  render_form(form) }}
+
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+{% endblock %}

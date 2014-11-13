@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% from "helpers/render.html" import render_form %}
+
+{% block title %}Chat main{% endblock %}
+
+{% block body %}
+
+    <h3>Search chat</h3>
+    <form role="form" action="/chat/search" method="post">
+        {{  render_form(chat_search_form) }}
+        <button type="button" class="btn btn-default main_handler" data-result-selector=".chats_block">Search</button>
+    </form>
+
+    <hr />
+
+    <div class="chats_block">{% include "chat/chats_list.html" %}</div>
+
+    <hr />
+
+    <h3>Add chat</h3>
+    <form role="form" action="/chat/add" method="post" data-clean-fields="True">
+        {{  render_form(chat_add_form) }}
+        <button type="button" class="btn btn-default main_handler" data-result-selector=".chats_block">Submit</button>
+    </form>
+
+{% endblock %}

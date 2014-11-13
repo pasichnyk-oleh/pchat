@@ -1,0 +1,43 @@
+{
+    "test_registration": [
+        [
+            {"name": "1234567", "password": "1234567"},
+            ", thanks for registration!"
+        ],
+        [
+            {"name": "", "password": ""},
+            "This field is required."
+        ],
+        [
+            {"name": "1234567", "password": "1234567"},
+            "Something going wrong!"
+        ]
+    ],
+    "test_isset_user": [
+        [
+            {"name": "abc123", "password": "1234567"}
+        ],
+        [
+            {"name": "abc1234", "password": "1234567"}
+        ]
+    ],
+    "test_not_isset_user": [
+        [
+            {"name": "abc1235", "password": "1234567"}
+        ],
+        [
+            {"name": "abc123456", "password": "1234567"}
+        ]
+    ],
+    "test_is_user_password_hashed": [
+        [
+            {"name": "abc1234567", "password": "dfdfddfdfdf"}
+        ],
+        [
+            {"name": "abc12345678", "password": "1234567"}
+        ],
+        [
+            {"name": "abc123456789", "password": "qeqww"}
+        ]
+    ]
+}

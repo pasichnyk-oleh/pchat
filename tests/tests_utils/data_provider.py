@@ -1,0 +1,57 @@
+# coding: utf-8 -*-
+
+__author__ = 'o.pasichnyk'
+__all__ = ['data_provider', ]
+
+from collections import Iterable
+
+
+def _simple_decorator(decorator):
+    """This decorator can be used to turn simple functions
+        into well-behaved decorators, so long as the decorators
+        are fairly simple. If a decorator expects a function and
+        returns a function (no descriptors), and if it doesn't
+        modify function attributes or docstring, then it is
+        eligible to use this. Simply apply @simple_decorator to
+        your decorator and it will automatically preserve the
+        docstring and function attributes of functions to which
+        it is applied."""
+
+    def new_decorator(f):
+        g = decorator(f)
+        g.__name__ = f.__name__
+        g.__doc__ = f.__doc__
+        g.__dict__.update(f.__dict__)
+        return g
+        # Now a few lines needed to make simple_decorator itself
+    # be a well-behaved decorator.
+    new_decorator.__name__ = decorator.__name__
+    new_decorator.__doc__ = decorator.__doc__
+    new_decorator.__dict__.update(decorator.__dict__)
+
+    return new_decorator
+
+
+def data_provider(data_set_source):
+    """Data provider decorator, allows another callable to provide the data for the test"""
+
+    @_simple_decorator
+    def test_decorator(fn):
+        def repl(self, *args):
+
+            if callable(data_set_source):
+                data_list = data_set_source()
+            elif isinstance(data_set_source, Iterable):
+                data_list = data_set_source
+            else:
+                data_list = None
+
+            for i in data_list:
+                try:
+                    fn(self, *i)
+                except AssertionError:
+                    #print "Assertion error caught with data set ", i
+                    raise
+        return repl
+
+    return test_decorator

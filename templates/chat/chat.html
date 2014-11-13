@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "helpers/render.html" import render_form %}
+
+{% block title %}Chat - {{ chat.name }}{% endblock %}
+{% block script %}<script type="text/javascript">var socket_url = '{{ SOCKET_URL }}'</script>{% endblock %}
+
+{% block body %}
+    <h3>Wellcome to the <b>{{ chat.name }}</b>!</h3>
+
+    <form role="form" data-clean-fields="True">
+        {{  render_form(form) }}
+        <button type="button" class="btn btn-default socket_handler" data-result-selector=".messages_block">Write</button>
+    </form>
+
+    <hr />
+
+    <div class="messages_block">
+        {% include "chat/messages_list.html" %}
+    </div>
+
+{% endblock %}
