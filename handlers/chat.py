@@ -6,6 +6,7 @@ __all__ = ['MainHandler', 'JoinHandler', 'ChatSearchHandler', 'ChatAddHandler', 
 import tornado.ioloop
 import tornado.websocket
 import tornado.escape
+import tornado.web
 
 from handlers.base import BaseHandler, form_validator
 from utils.auth import http_auth
