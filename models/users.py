@@ -9,7 +9,6 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from db_connect import db
 from models.base import Base
-from utils.md5_hash import decode_string
 from models.field_handlers import model_field_proccesing, Md5Handler
 
 
