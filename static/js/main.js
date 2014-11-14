@@ -2,10 +2,12 @@ $(document).ready(function() {
     if (!window.console) window.console = {};
     if (!window.console.log) window.console.log = function() {};
 
+    //if we has socket url - can start socket loop
     if (typeof socket_url !== "undefined") {
         updater.start();
     }
 
+    //click on buttons with class '.main_handler'
     $("form button.main_handler").click(function() {
         form = $(this).parent('form');
         url = form.attr('action');
@@ -13,14 +15,23 @@ $(document).ready(function() {
 
         data = get_form_data(form);
 
+        if (is_data_empty(data)) {
+            return
+        }
+
         request_and_insert(url, 'POST', data, result_selector, 'OMG! HACKED!');
 
         cleam_form_fields(form);
     });
 
+    //click on add message button
     $("form button.socket_handler").click(function() {
         form = $(this).parent('form');
         data = get_form_data(form);
+
+        if (is_data_empty(data)) {
+            return
+        }
 
         updater.socket.send(JSON.stringify(data));
 
@@ -33,6 +44,15 @@ $(document).ready(function() {
         request_and_insert(url, 'GET', [], '.chats_block')
     });
 });
+
+//check if some row in data is empty
+function is_data_empty(data) {
+    for (key in data) {
+        if (data[key] == '') {
+            return true
+        }
+    }
+}
 
 function cleam_form_fields(form, fields) {
     //cleaning form fields
@@ -67,6 +87,7 @@ function request_and_insert(url, method, data, insert_selector, error) {
     })
 }
 
+//socket proccessing
 var updater = {
     socket: null,
 
@@ -75,11 +96,12 @@ var updater = {
 
         updater.socket = new WebSocket(url);
         updater.socket.onmessage = function(event) {
-            updater.showMessage(JSON.parse(event.data));
+            updater.show_message(JSON.parse(event.data));
         };
     },
 
-    showMessage: function(data) {
+    //message append to tag
+    show_message: function(data) {
         var existing = $("#message-" + data.id);
 
         if (existing.length > 0) {
