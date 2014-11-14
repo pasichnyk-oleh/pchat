@@ -40,7 +40,7 @@ class ChatSearchHandler(BaseHandler):
     @form_validator(ChatSearchForm)
     def post(self, form):
 
-        search_value = '%{0}%'.format(self.get_argument("name"))
+        search_value = u'%{0}%'.format(self.get_argument("name"))
         chats = db.query(Chat).filter(Chat.name.like(search_value)).all()
 
         user_in_chats = ChatUser.get_user_chats(self.user_id)
