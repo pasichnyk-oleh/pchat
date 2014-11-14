@@ -3,8 +3,6 @@
 __author__ = 'o.pasichnyk'
 __all__ = ['MainHandler', 'RegistrationHandler', 'ErrorHandler', ]
 
-from sqlalchemy.exc import IntegrityError
-
 from db_connect import db
 from handlers.base import BaseHandler, form_validator
 from forms.users import RegistrationForm
@@ -35,14 +33,9 @@ class RegistrationHandler(BaseHandler):
         user = User()
         form.populate_obj(user)
         db.add(user)
+        db.commit()
 
-        try:
-            db.commit()
-        except IntegrityError:
-            db.rollback()
-            self.redirect("/error")
-        else:
-            self.render_to_response("registration_end.html", name=self.get_argument("name"))
+        self.render_to_response("registration_end.html", name=self.get_argument("name"))
 
 
 class ErrorHandler(BaseHandler):
