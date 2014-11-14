@@ -20,7 +20,7 @@ def model_field_proccesing(*handlers):
     def proccessing(method):
         def wrapper(self, key, value):
             for handler in handlers:
-                value = handler().process(value)
+                value = handler.process(value)
             return method(self, key, value)
 
         return wrapper
@@ -76,7 +76,9 @@ class ImageFindHandler(BaseHandler):
     '''
     _link_regex = re.compile("(?P<url>https?://[^\s]+)")
     _allowed_images_type = [('image/jpeg', 'jpeg'), ('image/pjpeg', 'jpg'), ('image/png', 'png')]
-    _save_path = './static/files/'
+
+    def __init__(self, save_path):
+        self._save_path = save_path
 
     def process(self, value):
         '''Implemented method'''
