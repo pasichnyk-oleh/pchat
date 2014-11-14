@@ -24,6 +24,7 @@ TEMPLATE_DIRS = [
 
 # static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(PROJECT_DIR, "static/")
+UPLOAD_FILES_ROOT = os.path.join(PROJECT_DIR, "files/")
 STATIC_URL = '/static/'
 
 #url for socket requests
