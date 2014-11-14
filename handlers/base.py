@@ -72,8 +72,7 @@ class BaseHandler(tornado.web.RequestHandler):
         :return: "string" that correspond "user name" or "None" if user is not authorized
         '''
         name = self._get_auth_data('user_name')
-
-        return unicode(name, 'utf8')
+        return unicode(name, 'utf8') if name else None
 
     user_name = property(_get_user_name)
 
