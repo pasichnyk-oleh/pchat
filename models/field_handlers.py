@@ -112,7 +112,7 @@ class ImageFindHandler(BaseHandler):
         :return: message with added img tag
         '''
         #todo: rewrite
-        return "{0}<br /><img src='{1}' />".format(text, img_path[1:])
+        return "{0}<br /><img src='{1}' />".format(text, img_path)
 
     def _get_and_save_content(self, url, mime):
         '''
@@ -130,7 +130,7 @@ class ImageFindHandler(BaseHandler):
         file_ext = dict(self._allowed_images_type).get(mime)
         file_path = '%s%s.%s' % (self._save_path, random_string(15), file_ext)
 
-        newFile = open (file_path, "wb+")
+        newFile = open (".%s" % file_path, "wb+")
         newFile.write(content.read())
         newFile.close()
 
