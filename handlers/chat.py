@@ -21,11 +21,8 @@ class MainHandler(BaseHandler):
         user_in_chats = ChatUser.get_user_chats(self.user_id)
         chats = db.query(Chat).all()
 
-        self.render_to_response("chat/index.html",
-                                chat_add_form=ChatAddForm(),
-                                chat_search_form=ChatSearchForm(),
-                                chats=chats,
-                                user_in_chats=user_in_chats)
+        self.render_to_response("chat/index.html", chat_add_form=ChatAddForm(),
+                                chat_search_form=ChatSearchForm(), chats=chats, user_in_chats=user_in_chats)
 
 
 @http_auth
@@ -77,7 +74,9 @@ class ChatHandler(BaseHandler):
             self.redirect("/chat")
 
         chat = db.query(Chat).filter(Chat.id == chat_id).one()
-        messages = db.query(Message, User).join(User).filter(Message.chat_id == chat_id).order_by(Message.id.desc()).limit(50).all()
+        messages = db.query(Message, User).join(User).filter(
+            Message.chat_id == chat_id).order_by(Message.id.desc()).limit(50).all()
+
         self.render_to_response("chat/chat.html", chat=chat, messages=messages, form=MessageForm(chat_id=chat_id))
 
 
