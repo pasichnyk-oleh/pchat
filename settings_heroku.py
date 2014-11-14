@@ -2,7 +2,11 @@
 
 __author__ = 'o.pasichnyk'
 
+import os
+
 DEBUG = False
+
+PORT = os.environ.get('PORT', 5000)
 
 DATABASE = {
     'name': 'd7snq90jp63ig7',
