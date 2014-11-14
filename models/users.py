@@ -38,6 +38,6 @@ class User(Base):
             return {'user_name': name, 'user_id': user.id}
 
     @validates('password')
-    @model_field_proccesing(Md5Handler)
+    @model_field_proccesing(Md5Handler())
     def validate_password(self, key, password):
         return password
