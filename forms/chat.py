@@ -19,4 +19,4 @@ class ChatSearchForm(Form):
 
 class MessageForm(Form):
     message = StringField(validators=[DataRequired(), Length(1,1024)])
-    chat_id = IntegerField(widget=HiddenInput())
+    chat_id = IntegerField(widget=HiddenInput(), validators=[DataRequired(), Length(1,1024)])
