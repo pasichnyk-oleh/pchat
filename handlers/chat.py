@@ -146,6 +146,7 @@ class MessagesSocketHandler(tornado.websocket.WebSocketHandler, BaseHandler):
         if not form.validate():
             raise tornado.web.HTTPError(400)
 
+        #adding message to DB
         message = Message()
         form.populate_obj(message)
         message.user_id = self.user_id
