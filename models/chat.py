@@ -82,7 +82,7 @@ class Message(Base):
     message = Column(String(255), nullable=False)
 
     @validates('message')
-    @model_field_proccesing(ImageFindHandler(settings.UPLOAD_FILES_ROOT))
+    @model_field_proccesing(ImageFindHandler(settings.UPLOAD_FILES_DIR))
     def validate_message(self, key, message):
         '''Validating message field'''
         return message
