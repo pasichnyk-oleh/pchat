@@ -7,7 +7,7 @@ from tests.base import BaseAsyncTestCase
 from tests.tests_utils.fixtureman import FixtureManager
 from tests.tests_utils.data_provider import data_provider
 from models.users import User
-from utils.md5_hash import decode_string
+from models.field_handlers import Md5Handler
 
 user_fixture = FixtureManager()
 user_fixture.load(fixture_file='fixtures/user', current_file=__file__)
@@ -44,7 +44,7 @@ class TestUser(BaseAsyncTestCase):
     def test_is_user_password_hashed(self, user_data):
         user = self.add_user(**user_data)
 
-        password_hash = decode_string(user_data['password'])
+        password_hash = Md5Handler().process(user_data['password'])
 
         self.assertTrue(user.password)
         self.assertEqual(user.password, password_hash)
