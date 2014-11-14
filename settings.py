@@ -47,7 +47,6 @@ def import_env_vars(env_settings):
             continue
 
         if item in globals_var:
-            print(item, getattr(env_settings, item))
             globals_var[item] = getattr(env_settings, item)
 
 try:
