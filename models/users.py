@@ -27,7 +27,7 @@ class User(Base):
         :param string: user password
         : return: None if not isset or dict with user_name and user_id keys
         '''
-        md5_password = decode_string(password)
+        md5_password = Md5Handler().process(password)
 
         try:
             user = db.query(User).filter_by(name=name, password=md5_password).one()
