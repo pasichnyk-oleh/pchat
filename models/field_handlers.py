@@ -72,12 +72,12 @@ class _HeadRequest(urllib2.Request):
 
 class ImageFindHandler(BaseHandler):
     '''
-    Class that find url in text, save it to local storage and add img tag to text
+    Class that find url in text, if it is image save it to local storage and add img tag to text
     '''
     _link_regex = re.compile("(?P<url>https?://[^\s]+)")
     _allowed_images_type = [('image/jpeg', 'jpeg'), ('image/pjpeg', 'jpg'), ('image/png', 'png')]
 
-    def __init__(self, save_path):
+    def __init__(self, save_path=''):
         self._save_path = save_path
 
     def process(self, value):
@@ -177,3 +177,13 @@ class ImageFindHandler(BaseHandler):
             return False
         else:
             return url
+
+class BotCmdHandler(BaseHandler):
+    '''
+    Bot that search some comand in text end execute it.
+    For example sum of 1 2 3
+    '''
+    def process(self, value):
+        '''Implemented method'''
+        # todo
+        return value
