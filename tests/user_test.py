@@ -48,3 +48,7 @@ class TestUser(BaseAsyncTestCase):
 
         self.assertTrue(user.password)
         self.assertEqual(user.password, password_hash)
+
+    def test_user_auth(self):
+        #todo
+        pass
