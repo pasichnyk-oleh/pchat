@@ -10,7 +10,11 @@
         ],
         [
             {"name": "1234567", "password": "1234567", "confirm_password": "1234567"},
-            "Something going wrong!"
+            "Username already exists"
+        ],
+        [
+            {"name": "1234567", "password": "1234567", "confirm_password": "1234d67"},
+            "Username already exists"
         ]
     ],
     "test_isset_user": [
