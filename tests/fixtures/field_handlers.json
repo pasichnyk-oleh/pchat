@@ -18,5 +18,17 @@
             "",
             "text text text dtdsydshsdh"
         ]
+    ],
+    "test_md5_handler": [
+        [
+            "123456",
+            "",
+            "e10adc3949ba59abbe56e057f20f883e"
+        ],
+        [
+            "123456",
+            "abc",
+            "a49a7e19c5ab0c2fe192288267e11fe1"
+        ]
     ]
 }
