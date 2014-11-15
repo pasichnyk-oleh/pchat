@@ -42,10 +42,12 @@ class BaseHandler(object):
 
 
 class Md5Handler(BaseHandler):
-    '''
-    Class that process string into md5 hash
-    '''
-    salt = 'abc' #string that will be added to hash
+    '''Class that process string into md5 hash'''
+
+    _salt = 'abc' #string that will be added to hash
+
+    def __init__(self, salt='abc'):
+        self._salt = salt
 
     def _decode_string(self, string):
         '''
@@ -54,7 +56,7 @@ class Md5Handler(BaseHandler):
         :param string: string to decode
         :return: hashed string
         '''
-        new_string = '{salt}{string}{salt}'.format(salt=self.salt, string=string)
+        new_string = '{salt}{string}{salt}'.format(salt=self._salt, string=string)
 
         return hashlib.md5(new_string).hexdigest()
 
@@ -71,13 +73,11 @@ class _HeadRequest(urllib2.Request):
 
 
 class ImageFindHandler(BaseHandler):
-    '''
-    Class that find url in text, if it is image save it to local storage and add img tag to text
-    '''
+    '''Class that find url in text, if it is image save it to local storage and add img tag to text'''
     _link_regex = re.compile("(?P<url>https?://[^\s]+)")
     _allowed_images_type = [('image/jpeg', 'jpeg'), ('image/pjpeg', 'jpg'), ('image/png', 'png')]
 
-    def __init__(self, save_path=''):
+    def __init__(self, save_path='.'):
         self._save_path = save_path
 
     def process(self, value):
@@ -138,7 +138,7 @@ class ImageFindHandler(BaseHandler):
 
     def _is_mime_allowed(self, mime):
         '''
-        Check if mime is allowed
+        Check is mime allowed
 
         :param mime: mime to check
         :return: True if is allowed and False if not
@@ -150,6 +150,7 @@ class ImageFindHandler(BaseHandler):
 
     def _get_url_mime(self, url):
         '''
+        Get mime type of url content
 
         :param url: url to get header
         :return: mime type or F
