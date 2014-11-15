@@ -1,0 +1,22 @@
+{
+    "test_image_hander": [
+        [
+            "text text text http://www.google.com/images/srpr/logo11w.png dtdsydshsdh",
+            "static/img/test_img.png",
+            "image/png",
+            "<img src='{0}'"
+        ],
+        [
+            "text text text http://www.google.com/images/srpr/logo11w.png dtdsydshsdh",
+            "static/img/test_img.png",
+            "audio/mp4",
+            "text text text"
+        ],
+        [
+            "text text text dtdsydshsdh",
+            "",
+            "",
+            "text text text dtdsydshsdh"
+        ]
+    ]
+}
