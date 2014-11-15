@@ -7,6 +7,7 @@ import urllib2
 import hashlib
 import re
 from abc import ABCMeta, abstractmethod
+import __builtin__
 
 from utils.random_data import random_string
 
@@ -184,7 +185,47 @@ class BotCmdHandler(BaseHandler):
     Bot that search some comand in text end execute it.
     For example sum of 1 2 3
     '''
+    _allowed_cmd_patterns = [(re.compile("(sum of (\d+\s?)+)"), "sum"),
+                             (re.compile("(min of (\d+\s?)+)"), "min"),
+                             (re.compile("(max of (\d+\s?)+)"), "max"),
+                             (re.compile("(sort (\d+\s?)+)"), "sorted")]
+
+    _elements_pattern = re.compile("\d+")
+
     def process(self, value):
         '''Implemented method'''
-        # todo
+
+        cmd, func = self._find_cmd(value)
+
+        if not cmd:
+            return value
+
+        elements = self._get_int_elements(cmd)
+
+        func_result = self._run_func(func, elements)
+
+        value = self._concat_to_text(func_result, cmd, value)
+
         return value
+
+    def _concat_to_text(self, result, cmd, orginal):
+        return "{0}<blockquote>result of {1} is: {2}</blockquote>".format(orginal, cmd, result)
+
+    def _run_func(self, func, elements):
+        return getattr(__builtin__, func)(elements)
+
+    def _get_int_elements(self, cmd):
+        result = re.findall(self._elements_pattern, cmd)
+
+        return map(int, result)
+
+    def _find_cmd(self, string):
+        for pattern, func in self._allowed_cmd_patterns:
+            try:
+                cmd = re.search(pattern, string).group()
+            except AttributeError:
+                continue
+            else:
+                return cmd, func
+
+        return None, None
