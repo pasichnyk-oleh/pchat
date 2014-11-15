@@ -1,2 +1,24 @@
 {
+    "test_chat_add": [
+        [
+            {"name": "test_name"}
+        ],
+        [
+            {"name": "кирилиця"}
+        ],
+        [
+            {"name": ""}
+        ],
+        [
+            {}
+        ],
+        [
+            {"undefined_field": "true", "undefined_field2": "true"}
+        ]
+    ],
+    "test_chat_search": [
+        [
+            {"name": "test_name"}
+        ]
+    ]
 }
