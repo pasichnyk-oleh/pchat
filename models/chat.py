@@ -10,7 +10,7 @@ from sqlalchemy.orm import validates
 import settings
 from models.base import Base
 from db_connect import db
-from models.field_handlers import model_field_proccesing, ImageFindHandler
+from models.field_handlers import model_field_proccesing, ImageFindHandler, BotCmdHandler
 
 
 class Chat(Base):
@@ -82,7 +82,7 @@ class Message(Base):
     message = Column(String(255), nullable=False)
 
     @validates('message')
-    @model_field_proccesing(ImageFindHandler(settings.UPLOAD_FILES_DIR))
+    @model_field_proccesing(ImageFindHandler(settings.UPLOAD_FILES_DIR), BotCmdHandler())
     def validate_message(self, key, message):
         '''Validating message field'''
         return message
