@@ -1,7 +1,7 @@
 # coding: utf-8 -*-
 
 __author__ = 'o.pasichnyk'
-__all__ = ['MainHandler', 'JoinHandler', 'ChatSearchHandler', 'ChatAddHandler', 'ChatHandler', 'MessagesSocketHandler']
+__all__ = ['MainHandler', 'JoinHandler', 'ChatSearchHandler', 'ChatAddHandler', 'ChatHandler', 'MessagesSocketHandler',]
 
 import tornado.ioloop
 import tornado.websocket
