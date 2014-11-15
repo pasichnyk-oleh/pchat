@@ -5,6 +5,7 @@ WTAlchemy==0.1b3
 WTForms==2.0.1
 backports.ssl-match-hostname==3.4.0.2
 certifi==14.05.14
+mock==1.0.1
 psycopg2==2.5.4
 requests==2.4.3
 tornado==4.0.2
