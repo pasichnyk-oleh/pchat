@@ -100,8 +100,9 @@ var updater = {
         };
 
         updater.socket.onclose = function(){
+            console.warn('something going wrong with sockets, reconnect...');
             // Try to reconnect in 2 seconds
-            setTimeout(function() {start_chat_ws()}, 2000);
+            setTimeout(function() {updater.start();}, 2000);
         };
     },
 
