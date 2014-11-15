@@ -8,7 +8,7 @@ from mock import MagicMock
 from tests.base import BaseAsyncTestCase
 from tests.tests_utils.fixtureman import FixtureManager
 from tests.tests_utils.data_provider import data_provider
-from models.field_handlers import ImageFindHandler, Md5Handler
+from models.field_handlers import ImageFindHandler, Md5Handler, BotCmdHandler
 
 field_handlers_fixture = FixtureManager()
 field_handlers_fixture.load(fixture_file='fixtures/field_handlers', current_file=__file__)
@@ -39,3 +39,11 @@ class TestMd5Handler(BaseAsyncTestCase):
         result = handler.process(text_to_process)
 
         self.assertEqual(result, text_to_compare)
+
+
+class TestBotCmdHandler(BaseAsyncTestCase):
+    @data_provider(field_handlers_fixture['test_bot_handler'])
+    def test_bot_handler(self, text, text_to_compare):
+        result = BotCmdHandler().process(text)
+
+        self.assertIn(text_to_compare, result)
