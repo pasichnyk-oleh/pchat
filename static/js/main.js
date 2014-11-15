@@ -98,6 +98,11 @@ var updater = {
         updater.socket.onmessage = function(event) {
             updater.show_message(JSON.parse(event.data));
         };
+
+        updater.socket.onclose = function(){
+            // Try to reconnect in 2 seconds
+            setTimeout(function() {start_chat_ws()}, 2000);
+        };
     },
 
     //message append to tag
@@ -110,4 +115,6 @@ var updater = {
 
         $(".messages_block").prepend(data.message);
     }
+
+
 };
