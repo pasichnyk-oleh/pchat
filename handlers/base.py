@@ -12,11 +12,10 @@ import settings
 def form_validator(form_cls, raise_http_error=True):
     '''
     Decorator for semi-auto form validation in handlers.
-    Data for validation get from "request.arguments"
+    Data for validation get from "Handler.request.arguments"
 
     :param form_cls: class of Form validator
     :param raise_http_error: if True will be raised tornado.web.HTTPError(400)
-    :return: wrappered function
     '''
     def method_wrapper(method):
         def wrapper(*args, **kwargs):
@@ -36,15 +35,13 @@ def form_validator(form_cls, raise_http_error=True):
 
 
 class BaseHandler(tornado.web.RequestHandler):
-    '''
-    Base class for handlers. Can return user id, user name, render temlates
-    '''
+    '''Base class for handlers. Can return user id, user name, render templates'''
     def _get_auth_data(self, key):
         '''
         Get data from Auth in headers by specific key
 
         :param key: what to get
-        :return: "value" if key exist, otherwise "None"
+        :return: "value" if key exist, otherwise None
         '''
         try:
             auth_data = self.request.headers.get('Auth')
@@ -59,7 +56,7 @@ class BaseHandler(tornado.web.RequestHandler):
         '''
         Get "user id" from headers
 
-        :return: "int" that correspond "user_id" or "None" if user is not authorized
+        :return: int that correspond "user_id" or None if user is not authorized
         '''
         return self._get_auth_data('user_id')
 
@@ -69,7 +66,7 @@ class BaseHandler(tornado.web.RequestHandler):
         '''
         Get user name from headers
 
-        :return: "string" that correspond "user name" or "None" if user is not authorized
+        :return: "string" that correspond "user name" or None if user is not authorized
         '''
         name = self._get_auth_data('user_name')
         return unicode(name, 'utf8') if name else None
