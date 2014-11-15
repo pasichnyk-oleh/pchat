@@ -18,6 +18,7 @@ from models.users import User
 
 @http_auth
 class MainHandler(BaseHandler):
+    '''Handler to process chat main page'''
     def get(self):
         user_in_chats = ChatUser.get_user_chats(self.user_id)
         chats = db.query(Chat).all()
@@ -28,6 +29,7 @@ class MainHandler(BaseHandler):
 
 @http_auth
 class JoinHandler(BaseHandler):
+    '''Handler to process joining/un-joining user to chat'''
     def get(self, chat_id):
         ChatUser.join_switcher(self.user_id, chat_id)
 
@@ -38,6 +40,7 @@ class JoinHandler(BaseHandler):
 
 @http_auth
 class ChatSearchHandler(BaseHandler):
+    '''Handler to process search query to search chats'''
     @form_validator(ChatSearchForm)
     def post(self, form):
 
@@ -51,17 +54,17 @@ class ChatSearchHandler(BaseHandler):
 
 @http_auth
 class ChatAddHandler(BaseHandler):
+    '''Handler to process adding new chat'''
     @form_validator(ChatAddForm)
     def post(self, form):
-        '''
-        Create new Chat object, populate it, save and render new chats list
-        '''
+        '''Create new Chat object, populate it, save and render new chats list'''
         chat = Chat()
         form.populate_obj(chat)
         chat.user_id = self.user_id
         db.add(chat)
         db.commit()
 
+        #re-render block with chats
         user_in_chats = ChatUser.get_user_chats(self.user_id)
         chats = db.query(Chat).all()
         self.render_to_response("chat/chats_list.html", chats=chats, user_in_chats=user_in_chats)
@@ -69,8 +72,9 @@ class ChatAddHandler(BaseHandler):
 
 @http_auth
 class ChatHandler(BaseHandler):
+    '''Handler to process some specific chat page'''
     def get(self, chat_id):
-        #if not in chat - redirct to main page
+        #if user is not joined to chat - redirct to chat main page
         if not ChatUser.has_access(self.user_id, chat_id):
             self.redirect("/chat")
 
@@ -83,6 +87,8 @@ class ChatHandler(BaseHandler):
 
 @http_auth
 class MessagesSocketHandler(tornado.websocket.WebSocketHandler, BaseHandler):
+    '''Handler to process socket work'''
+
     connections = set() #only unique socket connections
 
     def _format_data_to_form(self, data):
