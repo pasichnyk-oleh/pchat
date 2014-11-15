@@ -9,16 +9,16 @@ from db_connect import db
 from tests.base import BaseAsyncTestCase
 from tests.tests_utils.fixtureman import FixtureManager
 from models.chat import ChatUser
+from tests.tests_utils.data_provider import data_provider
 
 chat_fixture = FixtureManager()
 chat_fixture.load(fixture_file='fixtures/chat', current_file=__file__)
 
 
 class TestChat(BaseAsyncTestCase):
-
     def test_get_user_chats(self):
         chat_user = []
-        chat_user_obj = []
+        chat_user_obj = [] #remember for clean later
 
         for chat in self.chats:
             chat_user_obj.append(self.add_user_to_chat(chat.id, self.user.id))
@@ -30,7 +30,7 @@ class TestChat(BaseAsyncTestCase):
         self.delete_objects(*chat_user_obj)
 
     def test_user_has_access(self):
-        chat_user_obj = []
+        chat_user_obj = []  #remember for clean later
 
         for chat in self.chats:
             chat_user_obj.append(self.add_user_to_chat(chat.id, self.user.id))
@@ -53,7 +53,6 @@ class TestChat(BaseAsyncTestCase):
         self.assertTrue(get_row)
         self.delete_objects(get_row)
 
-
     def test_user_unjoin(self):
         chat = self.chats[0]
         self.add_user_to_chat(chat.id, self.user.id)
@@ -62,3 +61,12 @@ class TestChat(BaseAsyncTestCase):
 
         with self.assertRaises(NoResultFound):
             db.query(ChatUser).filter(ChatUser.user_id==self.user.id, ChatUser.chat_id==chat.id).one()
+
+    @data_provider(chat_fixture['test_chat_add'])
+    def test_chat_add(self, chat_data):
+        pass
+
+    @data_provider(chat_fixture['test_chat_search'])
+    def test_chat_search(self, chat_data):
+        #todo
+        pass
