@@ -16,7 +16,7 @@ def model_field_proccesing(*handlers):
     '''
     Decorator to handle some field in model
 
-    :param handlers: list of handlers that implement BaseHandler and will do something with field value
+    :param handlers: list - list of handlers that implement BaseHandler and will do something with field value
     '''
     def proccessing(method):
         def wrapper(self, key, value):
@@ -36,8 +36,8 @@ class BaseHandler(object):
         '''
         Method that will handle the value from model field
 
-        :param value: value to handle
-        :return: processed value
+        :param value: str - value to handle
+        :return: str - processed value
         '''
         pass
 
@@ -54,8 +54,8 @@ class Md5Handler(BaseHandler):
         '''
         Decode string to md5 hash + some salt
 
-        :param string: string to decode
-        :return: hashed string
+        :param string: str - value to decode
+        :return: str - hashed value
         '''
         new_string = '{salt}{string}{salt}'.format(salt=self._salt, string=string)
 
@@ -108,9 +108,9 @@ class ImageFindHandler(BaseHandler):
         '''
         Add img tag to text
 
-        :param text: text into which will be added img tag
-        :param img_path: path to img
-        :return: message with added img tag
+        :param text: str - text into which will be added img tag
+        :param img_path: str - path to img
+        :return: str - message with added img tag
         '''
         #todo: rewrite
         return "{0}<br /><img src='{1}' />".format(text, img_path)
@@ -119,9 +119,9 @@ class ImageFindHandler(BaseHandler):
         '''
         Get and save content to file
 
-        :param url: url to get content
-        :param mime: mime type of file
-        :return: path of saved file
+        :param url: str - url to get content
+        :param mime: str - mime type of file
+        :return: str -path of saved file
         '''
         try:
             content = urllib2.urlopen(url)
@@ -141,8 +141,8 @@ class ImageFindHandler(BaseHandler):
         '''
         Check is mime allowed
 
-        :param mime: mime to check
-        :return: True if is allowed and False if not
+        :param mime: str - mime to check
+        :return: bool - True if is allowed and False if not
         '''
         if not dict(self._allowed_images_type).get(mime, None):
             return False
@@ -153,8 +153,8 @@ class ImageFindHandler(BaseHandler):
         '''
         Get mime type of url content
 
-        :param url: url to get header
-        :return: mime type or F
+        :param url: str - url to get header
+        :return: str - mime type or F
         '''
         try:
             response = urllib2.urlopen(_HeadRequest(url))
@@ -170,8 +170,8 @@ class ImageFindHandler(BaseHandler):
         '''
         Search url in text
 
-        :param text: where to search
-        :return: url if finded or False if not
+        :param text: str - where to search
+        :return: str -url if finded or False if not
         '''
         try:
             url = re.search(self._link_regex, text).group("url")
@@ -183,7 +183,7 @@ class ImageFindHandler(BaseHandler):
 class BotCmdHandler(BaseHandler):
     '''
     Bot that search some comand in text end execute it.
-    For example sum of 1 2 3
+    For example: sum of 1 2 3
     '''
     _allowed_cmd_patterns = [(re.compile("(sum of (\d+\s?)+)"), "sum"),
                              (re.compile("(min of (\d+\s?)+)"), "min"),
