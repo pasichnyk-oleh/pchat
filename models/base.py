@@ -8,6 +8,7 @@ __all__ = ['Base', ]
 
 
 class _BaseModel(object):
+    '''Base abstrat model, that add default primary key id field'''
     __abstract__ = True
 
     id = Column(Integer, primary_key = True)
