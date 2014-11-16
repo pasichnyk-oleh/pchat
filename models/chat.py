@@ -31,8 +31,8 @@ class ChatUser(Base):
         '''
         Get id of chats that user join
 
-        :param user_id: id of user to get chats
-        :return: list of chats id
+        :param user_id: int - id of user to get chats
+        :return: list - list of chats id
         '''
         user_in_chat = db.query(cls.chat_id).filter(cls.user_id == user_id).all()
 
@@ -43,8 +43,8 @@ class ChatUser(Base):
         '''
         Switch user joining in some chat. If user is already joined - unjoin him, if not - join
 
-        :param user_id: id of user to switch
-        :param chat_id: id of chat to switch in
+        :param user_id: int - id of user to switch
+        :param chat_id: int - id of chat to switch in
         :return: None
         '''
         try:
@@ -62,9 +62,9 @@ class ChatUser(Base):
         '''
         Check if user has access to some chat
 
-        :param user_id: id of user to check
-        :param chat_id: id of chat to check
-        :return: True if user have access or False if not have
+        :param user_id: int - id of user to check
+        :param chat_id: int - id of chat to check
+        :return: bool - True if user have access or False if not have
         '''
         try:
             db.query(cls.id).filter(cls.user_id == user_id, cls.chat_id == chat_id).one()
