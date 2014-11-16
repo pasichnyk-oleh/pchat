@@ -23,16 +23,16 @@ class User(Base):
         '''
         Check exist or not user in DB
 
-        :param string: user name
-        :param string: user password
-        : return: None if not isset or dict with user_name and user_id keys
+        :param password: str - user name
+        :param string: str - user password
+        : return: dict - {} if not isset or dict with user_name and user_id keys
         '''
         md5_password = Md5Handler().process(password)
 
         try:
             user = db.query(User).filter_by(name=name, password=md5_password).one()
         except NoResultFound:
-            return None
+            return {}
         else:
             return {'user_name': name, 'user_id': user.id}
 
