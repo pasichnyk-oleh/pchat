@@ -208,18 +208,45 @@ class BotCmdHandler(BaseHandler):
 
         return value
 
-    def _concat_to_text(self, result, cmd, orginal):
-        return "{0}<blockquote>result of {1} is: {2}</blockquote>".format(orginal, cmd, result)
+    def _concat_to_text(self, result, cmd, original):
+        '''
+        Add some text to initial text
+
+        :param result: str - what will be added
+        :param cmd: str -  command  that was founded
+        :param original: str - initial text
+        :return: str - result of concatenating
+        '''
+        return "{0}<blockquote>result of {1} is: {2}</blockquote>".format(original, cmd, result)
 
     def _run_func(self, func, elements):
+        '''
+        Do some operation by function with some elements
+
+        :param func: str - func to process
+        :param elements: list - data what to handle
+        :return: result of function work
+        '''
         return getattr(__builtin__, func)(elements)
 
     def _get_int_elements(self, cmd):
+        '''
+        Get numbers from string
+
+        :param cmd: str - where to search numbers
+        :return: list - list of numbers
+        '''
         result = re.findall(self._elements_pattern, cmd)
 
         return map(int, result)
 
     def _find_cmd(self, string):
+        '''
+        Search comand in string
+
+        :param string: str - where to search
+        :return: tuple - if found will be return tuple with comand and function, otherwise None, None
+        '''
         for pattern, func in self._allowed_cmd_patterns:
             try:
                 cmd = re.search(pattern, string).group()
