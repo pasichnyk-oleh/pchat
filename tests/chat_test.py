@@ -1,8 +1,5 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['TestChat', ]
-
 from sqlalchemy.orm.exc import NoResultFound
 
 from db_connect import db
@@ -10,6 +7,9 @@ from tests.base import BaseAsyncTestCase
 from tests.tests_utils.fixtureman import FixtureManager
 from models.chat import ChatUser
 from tests.tests_utils.data_provider import data_provider
+
+__author__ = 'o.pasichnyk'
+__all__ = ['TestChat', ]
 
 chat_fixture = FixtureManager()
 chat_fixture.load(fixture_file='fixtures/chat', current_file=__file__)

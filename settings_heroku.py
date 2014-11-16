@@ -1,8 +1,8 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-
 import os
+
+__author__ = 'o.pasichnyk'
 
 DEBUG = False
 

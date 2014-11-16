@@ -1,8 +1,5 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['Chat', 'ChatUser', 'Message', ]
-
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import validates
@@ -11,6 +8,9 @@ import settings
 from models.base import Base
 from db_connect import db
 from models.field_handlers import model_field_proccesing, ImageFindHandler, BotCmdHandler
+
+__author__ = 'o.pasichnyk'
+__all__ = ['Chat', 'ChatUser', 'Message', ]
 
 
 class Chat(Base):

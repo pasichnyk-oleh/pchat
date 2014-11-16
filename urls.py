@@ -1,11 +1,12 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-
 import tornado
 
 import settings
 from handlers import main, chat
+
+__author__ = 'o.pasichnyk'
+
 
 urls = [
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': settings.STATIC_ROOT}),

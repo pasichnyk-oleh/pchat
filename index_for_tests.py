@@ -1,17 +1,15 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['TestingServer', ]
-
 import os
 
 import settings
 
+__author__ = 'o.pasichnyk'
+__all__ = ['TestingServer', ]
+
 
 class TestingServer(object):
-    '''
-    Server for tests. Clone DB such it do Django
-    '''
+    '''Server for tests. Clone DB such it do Django'''
     TEST_DB_NAME = 'test2'
     BACKUP_FILE_NAME = 'db_for_test.sql'
 

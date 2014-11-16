@@ -1,8 +1,5 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['User', ]
-
 from sqlalchemy import Column, String
 from sqlalchemy.orm import validates
 from sqlalchemy.orm.exc import NoResultFound
@@ -10,6 +7,9 @@ from sqlalchemy.orm.exc import NoResultFound
 from db_connect import db
 from models.base import Base
 from models.field_handlers import model_field_proccesing, Md5Handler
+
+__author__ = 'o.pasichnyk'
+__all__ = ['User', ]
 
 
 class User(Base):

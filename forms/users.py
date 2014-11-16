@@ -1,14 +1,14 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['RegistrationForm', ]
-
 from wtforms.fields import PasswordField, StringField
 from wtforms.validators import DataRequired, EqualTo, Length, ValidationError, Regexp
 from wtforms_tornado import Form
 
 from models.users import User
 from db_connect import db
+
+__author__ = 'o.pasichnyk'
+__all__ = ['RegistrationForm', ]
 
 
 class RegistrationForm(Form):

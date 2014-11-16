@@ -1,13 +1,13 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['TestUser', ]
-
 from tests.base import BaseAsyncTestCase
 from tests.tests_utils.fixtureman import FixtureManager
 from tests.tests_utils.data_provider import data_provider
 from models.users import User
 from models.field_handlers import Md5Handler
+
+__author__ = 'o.pasichnyk'
+__all__ = ['TestUser', ]
 
 user_fixture = FixtureManager()
 user_fixture.load(fixture_file='fixtures/user', current_file=__file__)

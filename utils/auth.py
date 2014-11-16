@@ -1,11 +1,11 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['http_auth', ]
-
 import base64
 
 from models.users import User
+
+__author__ = 'o.pasichnyk'
+__all__ = ['http_auth', ]
 
 user_checker = User.isset_user
 

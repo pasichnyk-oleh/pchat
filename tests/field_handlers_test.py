@@ -1,14 +1,14 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['TestImageFindHandler', ]
-
 from mock import MagicMock
 
 from tests.base import BaseAsyncTestCase
 from tests.tests_utils.fixtureman import FixtureManager
 from tests.tests_utils.data_provider import data_provider
 from models.field_handlers import ImageFindHandler, Md5Handler, BotCmdHandler
+
+__author__ = 'o.pasichnyk'
+__all__ = ['TestImageFindHandler', ]
 
 field_handlers_fixture = FixtureManager()
 field_handlers_fixture.load(fixture_file='fixtures/field_handlers', current_file=__file__)

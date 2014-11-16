@@ -1,10 +1,10 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['Base', ]
-
 from sqlalchemy import Column, Integer
 from sqlalchemy.ext.declarative import declarative_base
+
+__author__ = 'o.pasichnyk'
+__all__ = ['Base', ]
 
 
 class _BaseModel(object):

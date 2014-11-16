@@ -1,22 +1,23 @@
 # coding: utf-8 -*-
 
+from collections import Iterable
+
 __author__ = 'o.pasichnyk'
 __all__ = ['data_provider', ]
 
-from collections import Iterable
-
 
 def _simple_decorator(decorator):
-    """This decorator can be used to turn simple functions
-        into well-behaved decorators, so long as the decorators
-        are fairly simple. If a decorator expects a function and
-        returns a function (no descriptors), and if it doesn't
-        modify function attributes or docstring, then it is
-        eligible to use this. Simply apply @simple_decorator to
-        your decorator and it will automatically preserve the
-        docstring and function attributes of functions to which
-        it is applied."""
-
+    """
+    This decorator can be used to turn simple functions
+    into well-behaved decorators, so long as the decorators
+    are fairly simple. If a decorator expects a function and
+    returns a function (no descriptors), and if it doesn't
+    modify function attributes or docstring, then it is
+    eligible to use this. Simply apply @simple_decorator to
+    your decorator and it will automatically preserve the
+    docstring and function attributes of functions to which
+    it is applied.
+    """
     def new_decorator(f):
         g = decorator(f)
         g.__name__ = f.__name__
@@ -34,7 +35,6 @@ def _simple_decorator(decorator):
 
 def data_provider(data_set_source):
     """Data provider decorator, allows another callable to provide the data for the test"""
-
     @_simple_decorator
     def test_decorator(fn):
         def repl(self, *args):

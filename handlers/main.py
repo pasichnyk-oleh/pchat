@@ -1,12 +1,12 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['MainHandler', 'RegistrationHandler', 'ErrorHandler', ]
-
 from db_connect import db
 from handlers.base import BaseHandler, form_validator
 from forms.users import RegistrationForm
 from models.users import User
+
+__author__ = 'o.pasichnyk'
+__all__ = ['MainHandler', 'RegistrationHandler', 'ErrorHandler', ]
 
 
 class MainHandler(BaseHandler):

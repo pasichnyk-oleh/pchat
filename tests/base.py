@@ -1,8 +1,5 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['BaseAsyncTestCase', ]
-
 from requests import Request
 from tornado.testing import AsyncTestCase
 from tornado.testing import AsyncHTTPClient
@@ -12,6 +9,9 @@ from models.users import User
 from models.chat import ChatUser, Chat
 from db_connect import db
 from utils.random_data import random_string
+
+__author__ = 'o.pasichnyk'
+__all__ = ['BaseAsyncTestCase', ]
 
 
 class BaseAsyncTestCase(AsyncTestCase):
@@ -36,7 +36,7 @@ class BaseAsyncTestCase(AsyncTestCase):
         '''
         Delete object or objects
 
-        :param args: object/objects to delete
+        :param args: tuple - object/objects to delete
         :return: None
         '''
         for obj in args:
@@ -48,13 +48,13 @@ class BaseAsyncTestCase(AsyncTestCase):
         '''
         Do http request
 
-        :param uri: do request to this uri (server_url + uri)
-        :param data: request key/value data
-        :param method: do request by this method
-        :param timeout: sleep to some seconds if need
-        :param body_ckeck: check response body by assertTrue of not
+        :param uri: string - do request to this uri (server_url + uri)
+        :param data: dict - request key/value data
+        :param method: string - POST/GET - do request by this method
+        :param timeout: int - sleep to some seconds if need
+        :param body_ckeck: bool - True/False - check response body by assertTrue of not
         :param kwargs: some addition params that will be send with request
-        :return: body response
+        :return: string - body response
         '''
         request_data = data if data else {}
 
@@ -90,9 +90,9 @@ class BaseAsyncTestCase(AsyncTestCase):
         '''
         Do http GET request (get wrapper for do_request)
 
-        :param args:
-        :param kwargs:
-        :return: response body
+        :param args: all non keyed params in do_request mehthod
+        :param kwargs: all keyed params in do_request mehthod
+        :return: string - response body
         '''
         kwargs['method'] = 'GET'
         return self.do_request(*args, **kwargs)
@@ -101,9 +101,9 @@ class BaseAsyncTestCase(AsyncTestCase):
         '''
         Do http POST request (post wrapper for do_request)
 
-        :param args:
-        :param kwargs:
-        :return: response body
+        :param args: all non keyed params in do_request mehthod
+        :param kwargs: all keyed params in do_request mehthod
+        :return: string - response body
         '''
         kwargs['method'] = 'POST'
         return self.do_request(*args, **kwargs)
@@ -112,8 +112,8 @@ class BaseAsyncTestCase(AsyncTestCase):
         '''
         Add some user to DB
 
-        :param user_data: some user data
-        :return: new added user
+        :param user_data: dict - some user data
+        :return: User - new added user
         '''
         user = User(**user_data)
 
@@ -126,11 +126,16 @@ class BaseAsyncTestCase(AsyncTestCase):
         '''
         Prepopulate some user, that can be accessed by self.user
 
-        :return: new added user
+        :return: User - new added user
         '''
         return self.add_user(name='base_user_test', password='123456')
 
     def add_user_to_chat(self, chat_id, user_id):
+        '''
+        Add some user to some chat
+
+        :return: ChatUser - added user to chat
+        '''
         chat_user = ChatUser(chat_id=chat_id, user_id=user_id)
 
         db.add(chat_user)
@@ -142,9 +147,9 @@ class BaseAsyncTestCase(AsyncTestCase):
         '''
         Wrapper for adding chat
 
-        :param name: name of chat
-        :param user_id: user id of user that add chat
-        :return: new added chat
+        :param name: string - name of chat
+        :param user_id: int - user id of user that add chat
+        :return: Chat - new added chat
         '''
         chat = Chat(name=name, user_id=user_id)
 
@@ -155,10 +160,10 @@ class BaseAsyncTestCase(AsyncTestCase):
 
     def add_some_chats(self, num=5):
         '''
-        Prepopulate some chats
+        Prepopulate some random chats
 
-        :param num: how much chats will be generated, default=5
-        :return: list of generated chats
+        :param num: int - how much chats will be generated, default=5
+        :return: list - populated chats
         '''
         chats = []
 

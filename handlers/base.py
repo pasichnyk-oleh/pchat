@@ -1,12 +1,12 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['form_validator', 'BaseHandler', ]
-
 import tornado.web
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 
 import settings
+
+__author__ = 'o.pasichnyk'
+__all__ = ['form_validator', 'BaseHandler', ]
 
 
 def form_validator(form_cls, raise_http_error=True):

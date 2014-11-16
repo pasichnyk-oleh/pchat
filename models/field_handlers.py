@@ -1,15 +1,15 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['model_field_proccesing', 'Md5Handler', 'ImageFindHandler', ]
-
 import urllib2
 import hashlib
 import re
-from abc import ABCMeta, abstractmethod
 import __builtin__
+from abc import ABCMeta, abstractmethod
 
 from utils.random_data import random_string
+
+__author__ = 'o.pasichnyk'
+__all__ = ['model_field_proccesing', 'Md5Handler', 'ImageFindHandler', ]
 
 
 def model_field_proccesing(*handlers):

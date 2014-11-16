@@ -1,10 +1,9 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-
 import os
 import importlib
 
+__author__ = 'o.pasichnyk'
 
 PROJECT_DIR = os.path.join(os.path.dirname(__file__))
 
@@ -32,7 +31,7 @@ UPLOAD_FILES_DIR = "/static/files/"
 SOCKET_URL = r"/chat/socket"
 
 # settings for testing
-TESTING_PORT = 8889 #port for unit test
+TESTING_PORT = 8888 #port for unit test
 TESTING_SITE_URL = '0.0.0.0' #url for tests requests
 
 

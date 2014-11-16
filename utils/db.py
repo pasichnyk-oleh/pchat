@@ -1,12 +1,11 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['PostgreSqlConnect', ]
-
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
+__author__ = 'o.pasichnyk'
+__all__ = ['PostgreSqlConnect', ]
 
 class _Singleton(object):
   _instance = None

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
 
 import settings
 from urls import urls
+
+__author__ = 'o.pasichnyk'
 
 
 tornado_settings = {'static_path': settings.STATIC_ROOT}

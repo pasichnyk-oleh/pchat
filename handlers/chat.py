@@ -1,8 +1,5 @@
 # coding: utf-8 -*-
 
-__author__ = 'o.pasichnyk'
-__all__ = ['MainHandler', 'JoinHandler', 'ChatSearchHandler', 'ChatAddHandler', 'ChatHandler', 'MessagesSocketHandler',]
-
 import tornado.ioloop
 import tornado.websocket
 import tornado.escape
@@ -14,6 +11,9 @@ from forms.chat import ChatAddForm, ChatSearchForm, MessageForm
 from db_connect import db
 from models.chat import Chat, ChatUser, Message
 from models.users import User
+
+__author__ = 'o.pasichnyk'
+__all__ = ['MainHandler', 'JoinHandler', 'ChatSearchHandler', 'ChatAddHandler', 'ChatHandler', 'MessagesSocketHandler',]
 
 
 @http_auth
