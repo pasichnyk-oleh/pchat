@@ -1,4 +1,4 @@
-Somecode example
+Some code example
 ===
 simple web chat based on:
   * Tornado
