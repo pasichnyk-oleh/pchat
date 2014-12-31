@@ -1,5 +1,5 @@
-pchat
-=====
+Some my code example
+
 simple web chat based on:
   * Tornado
   * WebSocket
